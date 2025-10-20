@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乡约浙里 - 乡村记忆相册</title>
+    <style>
+        :root {
+            --primary: #4a7c59;
+            --secondary: #8d6b3c;
+            --accent: #d4a55c;
+            --light: #f5f1e6;
+            --dark: #3c3c3c;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4a55c' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #3a6147);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+        
+        .upload-area {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid #e0d6c2;
+        }
+        
+        .upload-box {
+            border: 2px dashed var(--primary);
+            border-radius: var(--radius);
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            background-color: rgba(74, 124, 89, 0.05);
+        }
+        
+        .upload-box:hover {
+            background-color: rgba(74, 124, 89, 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn:hover {
+            background-color: #3a6147;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #c4954a;
+        }
+        
+        .photos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .photo-card {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            position: relative;
+            border: 1px solid #e0d6c2;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .photo-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .photo-info {
+            padding: 1rem;
+        }
+        
+        .photo-date {
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 0.5rem;
+        }
+        
+        .photo-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+        
+        .delete-btn {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .delete-btn:hover {
+            transform: scale(1.2);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #e0d6c2;
+        }
+        
+        .empty-icon {
+            font-size: 4rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #e0d6c2;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .photos-container {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>乡约浙里</h1>
+        <p class="tagline">珍藏乡村美好记忆</p>
+    </header>
+    
+    <div class="container">
+        <section class="upload-area">
+            <h2 class="section-title">添加乡村照片</h2>
+            
+            <div class="upload-box" id="uploadArea">
+                <div class="upload-icon">🏞️</div>
+                <h3>点击上传乡村照片</h3>
+                <p>支持JPG、PNG等常见图片格式</p>
+            </div>
+            
+            <input type="file" id="fileInput" class="file-input" accept="image/*" multiple>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button class="btn" id="uploadBtn">
+                    <span>📤</span> 选择照片
+                </button>
+                <button class="btn btn-secondary" id="clearAllBtn">
+                    <span>🗑️</span> 清空相册
+                </button>
+            </div>
+        </section>
+        
+        <section class="photos-section">
+            <h2 class="section-title">乡村记忆相册</h2>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalPhotos">0</div>
+                    <div class="stat-label">照片总数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="albumSize">0</div>
+                    <div class="stat-label">相册大小</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="lastUpdate">-</div>
+                    <div class="stat-label">最后更新</div>
+                </div>
+            </div>
+            
+            <div class="photos-container" id="photosContainer">
+                <!-- 照片将通过JavaScript动态生成 -->
+            </div>
+            
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">🖼️</div>
+                <h3>相册空空如也</h3>
+                <p>上传第一张照片开始记录您的乡村记忆吧！</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 乡约浙里 - 珍藏乡村美好记忆</p>
+        <p style="margin-top: 1rem; opacity: 0.8;">所有照片均保存在您的浏览器本地，不会上传到服务器</p>
+    </footer>
+
+    <script>
+        // 照片数据管理
+        let photos = [];
+        const STORAGE_KEY = 'countrysidePhotos';
+        
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPhotos();
+            updateStats();
+            
+            // 绑定事件
+            document.getElementById('uploadBtn').addEventListener('click', function() {
+                document.getElementById('fileInput').click();
+            });
+            
+            document.getElementById('uploadArea').addEventListener('click', function() {
+                document.getElementById('fileInput').click();
+            });
+            
+            document.getElementById('fileInput').addEventListener('change', handleFileUpload);
+            
+            document.getElementById('clearAllBtn').addEventListener('click', clearAllPhotos);
+        });
+        
+        // 加载照片
+        function loadPhotos() {
+            const storedPhotos = localStorage.getItem(STORAGE_KEY);
+            if (storedPhotos) {
+                photos = JSON.parse(storedPhotos);
+                displayPhotos();
+            }
+        }
+        
+        // 保存照片
+        function savePhotos() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(photos));
+            updateStats();
+        }
+        
+        // 显示照片
+        function displayPhotos() {
+            const container = document.getElementById('photosContainer');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (photos.length === 0) {
+                container.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            container.innerHTML = '';
+            
+            photos.forEach((photo, index) => {
+                const photoCard = document.createElement('div');
+                photoCard.className = 'photo-card';
+                
+                photoCard.innerHTML = `
+                    <img src="${photo.data}" alt="乡村照片" class="photo-img">
+                    <div class="photo-info">
+                        <div class="photo-date">${formatDate(photo.date)}</div>
+                        <div class="photo-actions">
+                            <span>${photo.name}</span>
+                            <button class="delete-btn" data-index="${index}">🗑️</button>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(photoCard);
+            });
+            
+            // 添加删除按钮事件
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    deletePhoto(index);
+                });
+            });
+        }
+        
+        // 处理文件上传
+        function handleFileUpload(event) {
+            const files = event.target.files;
+            
+            if (files.length === 0) return;
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                if (!file.type.match('image.*')) {
+                    alert('请选择图片文件');
+                    continue;
+                }
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const photo = {
+                        id: Date.now() + i,
+                        name: file.name,
+                        data: e.target.result,
+                        date: new Date().toISOString(),
+                        size: file.size
+                    };
+                    
+                    photos.push(photo);
+                    savePhotos();
+                    displayPhotos();
+                };
+                
+                reader.readAsDataURL(file);
+            }
+            
+            // 重置文件输入
+            event.target.value = '';
+        }
+        
+        // 删除照片
+        function deletePhoto(index) {
+            if (confirm('确定要删除这张照片吗？')) {
+                photos.splice(index, 1);
+                savePhotos();
+                displayPhotos();
+            }
+        }
+        
+        // 清空所有照片
+        function clearAllPhotos() {
+            if (photos.length === 0) {
+                alert('相册已经是空的');
+                return;
+            }
+            
+            if (confirm('确定要清空整个相册吗？此操作不可撤销。')) {
+                photos = [];
+                savePhotos();
+                displayPhotos();
+            }
+        }
+        
+        // 更新统计信息
+        function updateStats() {
+            document.getElementById('totalPhotos').textContent = photos.length;
+            
+            // 计算相册总大小
+            let totalSize = 0;
+            photos.forEach(photo => {
+                totalSize += photo.size || 0;
+            });
+            
+            document.getElementById('albumSize').textContent = formatFileSize(totalSize);
+            
+            // 更新最后更新时间
+            if (photos.length > 0) {
+                const lastPhoto = photos.reduce((latest, photo) => {
+                    return new Date(photo.date) > new Date(latest.date) ? photo : latest;
+                });
+                
+                document.getElementById('lastUpdate').textContent = formatDate(lastPhoto.date, true);
+            } else {
+                document.getElementById('lastUpdate').textContent = '-';
+            }
+        }
+        
+        // 格式化日期
+        function formatDate(dateString, short = false) {
+            const date = new Date(dateString);
+            
+            if (short) {
+                return date.toLocaleDateString('zh-CN');
+            }
+            
+            return date.toLocaleString('zh-CN');
+        }
+        
+        // 格式化文件大小
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 B';
+            
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+    </script>
+</body>
+</html>
